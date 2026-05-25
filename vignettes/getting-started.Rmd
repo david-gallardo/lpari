@@ -41,6 +41,19 @@ plot_lpari_posterior(fit)
 plot_lpari_profiles(fit)
 ```
 
+## Applied clinical example
+
+The Reaven-Miller diabetes data provide a small applied example with continuous
+clinical biomarkers and an external diagnostic group label.
+
+```{r diabetes-example, eval = FALSE}
+diabetes_fit <- lpari_example("reaven_miller_diabetes", n_starts = 25)
+
+diabetes_fit$null_gate
+diabetes_fit$selection
+diabetes_fit$posterior
+```
+
 ## Supplementary examples
 
 Iris and Holzinger-Swineford are useful for demonstrating package functions, but their

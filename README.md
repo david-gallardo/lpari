@@ -11,7 +11,8 @@ The package includes:
   be retained before interpreting LPA-RI;
 - LPA-RI scoring with bundled Study 1 coefficients;
 - calibrated plausibility over candidate values of `K`;
-- worked examples for Old Faithful, `iris`, and Holzinger-Swineford.
+- worked examples for Old Faithful, Reaven-Miller diabetes, `iris`, and
+  Holzinger-Swineford.
 
 LPA-RI is experimental research software. It is intended to complement, not
 replace, substantive theory, graphical diagnostics, robustness checks, and
@@ -70,6 +71,7 @@ plot_lpari_profiles(fit)
 available_lpari_examples()
 
 faithful_fit <- lpari_example("old_faithful", n_starts = 25)
+diabetes_fit <- lpari_example("reaven_miller_diabetes", n_starts = 25)
 iris_fit <- lpari_example("iris", n_starts = 25)
 hs_fit <- lpari_example("holzinger_swineford", n_starts = 25)
 ```
@@ -90,6 +92,7 @@ The first release uses the Study 1 coefficients trained in the manuscript
 simulations. The strongest use case is small-sample enumeration under difficult
 conditions where classical information criteria often overfit.
 
-Iris and Holzinger-Swineford are included as cautionary supplementary examples:
-their external labels should not be interpreted as guaranteed latent-profile
-ground truth.
+The Reaven-Miller diabetes data provide a small applied clinical example with
+external diagnostic labels. Iris and Holzinger-Swineford are included as
+cautionary supplementary examples: their external labels should not be
+interpreted as guaranteed latent-profile ground truth.

@@ -1,9 +1,13 @@
 test_that("bundled examples load", {
   examples <- available_lpari_examples()
-  expect_true(all(c("old_faithful", "iris", "holzinger_swineford") %in% examples$name))
+  expect_true(all(c("old_faithful", "reaven_miller_diabetes", "iris", "holzinger_swineford") %in% examples$name))
   faithful <- load_lpari_example("old_faithful")
   expect_true(all(faithful$indicators %in% names(faithful$data)))
   expect_null(faithful$label)
+  diabetes <- load_lpari_example("reaven_miller_diabetes")
+  expect_equal(nrow(diabetes$data), 145)
+  expect_true(all(diabetes$indicators %in% names(diabetes$data)))
+  expect_equal(diabetes$label, "group")
 })
 
 test_that("LPA-RI scores candidate rows", {

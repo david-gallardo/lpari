@@ -12,7 +12,8 @@ Description: Implements LPA-RI, a recovery-calibrated index for choosing the
     package includes a lightweight diagonal Gaussian latent profile fitter,
     candidate scoring with calibrated LPA-RI coefficients, a conservative
     null gate, posterior-style plausibility summaries over candidate K values,
-    and worked examples using Old Faithful, iris, and Holzinger-Swineford data.
+    and worked examples using Old Faithful, Reaven-Miller diabetes, iris, and
+    Holzinger-Swineford data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

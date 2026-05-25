@@ -4,11 +4,13 @@
 \alias{load_lpari_example}
 \title{Load a bundled LPA-RI example}
 \usage{
-load_lpari_example(name = c("old_faithful", "iris", "holzinger_swineford"))
+load_lpari_example(
+  name = c("old_faithful", "reaven_miller_diabetes", "iris", "holzinger_swineford")
+)
 }
 \arguments{
-\item{name}{One of \code{"old_faithful"}, \code{"iris"}, or
-\code{"holzinger_swineford"}.}
+\item{name}{One of \code{"old_faithful"}, \code{"reaven_miller_diabetes"},
+\code{"iris"}, or \code{"holzinger_swineford"}.}
 }
 \value{
 A list with \code{data}, \code{indicators}, \code{label}, \code{id}, and \code{title}.

@@ -5,7 +5,7 @@
 \title{Run a bundled LPA-RI example}
 \usage{
 lpari_example(
-  name = c("old_faithful", "iris", "holzinger_swineford"),
+  name = c("old_faithful", "reaven_miller_diabetes", "iris", "holzinger_swineford"),
   n_starts = 25,
   k = 1:5,
   seed = 20260525,
@@ -13,8 +13,8 @@ lpari_example(
 )
 }
 \arguments{
-\item{name}{One of \code{"old_faithful"}, \code{"iris"}, or
-\code{"holzinger_swineford"}.}
+\item{name}{One of \code{"old_faithful"}, \code{"reaven_miller_diabetes"},
+\code{"iris"}, or \code{"holzinger_swineford"}.}
 
 \item{n_starts}{Number of random starts for each candidate K.}
 
