@@ -1,0 +1,31 @@
+Package: lpari
+Title: Recovery-Calibrated Enumeration for Latent Profile Analysis
+Version: 0.1.0
+Authors@R: c(
+    person("David", "Gallardo-Pujol", role = c("aut", "cre"),
+           email = "david.gallardo@ub.edu")
+  )
+Description: Implements LPA-RI, a recovery-calibrated index for choosing the
+    number of latent profiles in small-sample latent profile analysis. The
+    package includes a lightweight diagonal Gaussian latent profile fitter,
+    candidate scoring with calibrated LPA-RI coefficients, posterior-style
+    plausibility summaries over candidate K values, and worked examples using
+    Old Faithful, iris, and Holzinger-Swineford data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends:
+    R (>= 4.1)
+Imports:
+    graphics,
+    grDevices,
+    stats,
+    utils
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+LazyData: true
+Config/testthat/edition: 3

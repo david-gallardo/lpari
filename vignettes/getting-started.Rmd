@@ -1,0 +1,60 @@
+---
+title: "Getting started with lpari"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with lpari}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+`lpari` implements LPA-RI, a recovery-calibrated index for choosing the number
+of profiles in latent profile analysis.
+
+## Old Faithful
+
+Old Faithful is the primary package example because the eruption duration and
+waiting-time variables have a clear bimodal structure.
+
+```{r faithful-example, eval = FALSE}
+library(lpari)
+
+ex <- load_lpari_example("old_faithful")
+
+fit <- fit_lpari(
+  ex$data[, ex$indicators],
+  k = 1:5,
+  n_starts = 50,
+  id = ex$data[[ex$id]],
+  seed = 20260525
+)
+
+fit
+fit$selection
+fit$posterior
+
+plot_lpari_posterior(fit)
+plot_lpari_profiles(fit)
+```
+
+## Supplementary examples
+
+Iris and Holzinger-Swineford are useful for demonstrating the API, but their
+external labels should not be treated as guaranteed latent-profile ground truth.
+
+```{r supplementary-examples, eval = FALSE}
+iris_fit <- lpari_example("iris", n_starts = 25)
+hs_fit <- lpari_example("holzinger_swineford", n_starts = 25)
+
+iris_fit$selection
+hs_fit$selection
+```
+
+## Reading the posterior-style output
+
+The `posterior_k` column is a calibrated plausibility distribution over the
+candidate K values that were actually fitted. It is useful for reporting
+enumeration uncertainty, but it is not a generative Bayesian posterior.
