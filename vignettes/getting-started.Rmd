@@ -33,6 +33,7 @@ fit <- fit_lpari(
 )
 
 fit
+fit$null_gate
 fit$selection
 fit$posterior
 
@@ -42,7 +43,7 @@ plot_lpari_profiles(fit)
 
 ## Supplementary examples
 
-Iris and Holzinger-Swineford are useful for demonstrating the API, but their
+Iris and Holzinger-Swineford are useful for demonstrating package functions, but their
 external labels should not be treated as guaranteed latent-profile ground truth.
 
 ```{r supplementary-examples, eval = FALSE}
@@ -58,3 +59,16 @@ hs_fit$selection
 The `posterior_k` column is a calibrated plausibility distribution over the
 candidate K values that were actually fitted. It is useful for reporting
 enumeration uncertainty, but it is not a generative Bayesian posterior.
+
+## Null gate
+
+LPA-RI is a conditional enumeration aid, not a test that latent profiles exist.
+Use the null gate before interpreting the selected profile count:
+
+```{r null-gate, eval = FALSE}
+lpari_null_gate(fit)
+lpari_null_gate(fit, min_delta = 10)
+```
+
+If the gate recommends `retain_K1`, report the one-profile solution and treat
+multiclass output as exploratory sensitivity information.

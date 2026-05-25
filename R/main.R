@@ -56,7 +56,11 @@ make_profile_means <- function(fit_result, selected_k) {
 #' @param id Optional observation identifiers.
 #' @param seed Optional random seed.
 #' @param temperature Optional posterior calibration temperature.
-#' @return An object of class `lpari_result`.
+#' @return An object of class `lpari_result` containing the raw LPA-RI
+#'   selected K (`selected_k`), the conservative null-gated recommendation
+#'   (`recommended_k`), the null-gate diagnostics (`null_gate`), selection
+#'   summaries, calibrated plausibility values, fitted models, assignments,
+#'   and profile means.
 #' @export
 fit_lpari <- function(data,
                       k = 1:5,
@@ -91,7 +95,9 @@ fit_lpari <- function(data,
   scored <- lpari_score_candidates(candidates)
   scored <- lpari_posterior(scored, temperature = temperature)
   selection <- lpari_selection_summary(scored)
+  null_gate <- lpari_null_gate(scored)
   lpari_k <- selection$selected_k[selection$method == "LPA_RI"][[1]]
+  recommended_k <- if (isTRUE(null_gate$gate_pass[[1]])) lpari_k else 1L
   posterior <- scored[order(-scored$posterior_k, scored$candidate_k), , drop = FALSE]
   posterior <- posterior[, c(
     "candidate_k",
@@ -124,6 +130,8 @@ fit_lpari <- function(data,
     list(
       call = match.call(),
       selected_k = lpari_k,
+      recommended_k = recommended_k,
+      null_gate = null_gate,
       selection = selection,
       posterior = posterior,
       fit_table = fit$fit_table,
@@ -148,6 +156,12 @@ print.lpari_result <- function(x, ...) {
   bic <- x$selection[x$selection$method == "BIC", , drop = FALSE]
   cat("LPA-RI result\n")
   cat("  Selected K:", x$selected_k, "\n")
+  if (!is.null(x$recommended_k)) {
+    cat("  Recommended K after null gate:", x$recommended_k, "\n")
+  }
+  if (!is.null(x$null_gate)) {
+    cat("  Null gate:", x$null_gate$recommended_action[[1]], "\n")
+  }
   cat("  LPA-RI posterior:", sprintf("%.3f", best$posterior_best), "\n")
   if (nrow(bic) == 1) {
     cat("  BIC selected K:", bic$selected_k, "\n")
@@ -160,6 +174,8 @@ print.lpari_result <- function(x, ...) {
 summary.lpari_result <- function(object, ...) {
   out <- list(
     selected_k = object$selected_k,
+    recommended_k = object$recommended_k,
+    null_gate = object$null_gate,
     selection = object$selection,
     posterior = object$posterior,
     fit_table = object$fit_table,

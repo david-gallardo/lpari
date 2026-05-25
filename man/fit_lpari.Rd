@@ -42,7 +42,11 @@ fit_lpari(
 \item{temperature}{Optional posterior calibration temperature.}
 }
 \value{
-An object of class \code{lpari_result}.
+An object of class \code{lpari_result} containing the raw LPA-RI
+selected K (\code{selected_k}), the conservative null-gated recommendation
+(\code{recommended_k}), the null-gate diagnostics (\code{null_gate}), selection
+summaries, calibrated plausibility values, fitted models, assignments,
+and profile means.
 }
 \description{
 This is the main user-facing workflow. It fits candidate latent profile

@@ -5,12 +5,14 @@ Authors@R: c(
     person("David", "Gallardo-Pujol", role = c("aut", "cre"),
            email = "david.gallardo@ub.edu")
   )
+Author: David Gallardo-Pujol [aut, cre]
+Maintainer: David Gallardo-Pujol <david.gallardo@ub.edu>
 Description: Implements LPA-RI, a recovery-calibrated index for choosing the
     number of latent profiles in small-sample latent profile analysis. The
     package includes a lightweight diagonal Gaussian latent profile fitter,
-    candidate scoring with calibrated LPA-RI coefficients, posterior-style
-    plausibility summaries over candidate K values, and worked examples using
-    Old Faithful, iris, and Holzinger-Swineford data.
+    candidate scoring with calibrated LPA-RI coefficients, a conservative
+    null gate, posterior-style plausibility summaries over candidate K values,
+    and worked examples using Old Faithful, iris, and Holzinger-Swineford data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

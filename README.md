@@ -7,6 +7,8 @@ The package includes:
 
 - a lightweight diagonal Gaussian latent profile fitter;
 - AIC, BIC, CAIC, SABIC, ICL, entropy, and class-size summaries;
+- a conservative null gate for deciding whether a one-profile structure should
+  be retained before interpreting LPA-RI;
 - LPA-RI scoring with bundled Study 1 coefficients;
 - calibrated plausibility over candidate values of `K`;
 - worked examples for Old Faithful, `iris`, and Holzinger-Swineford.
@@ -54,6 +56,7 @@ fit <- fit_lpari(
 )
 
 fit
+fit$null_gate
 fit$selection
 fit$posterior
 
@@ -76,6 +79,12 @@ hs_fit <- lpari_example("holzinger_swineford", n_starts = 25)
 `posterior_k` is a temperature-calibrated plausibility distribution over the
 candidate profile counts that were fitted. It should be read as calibrated
 enumeration uncertainty, not as a generative Bayesian posterior.
+
+LPA-RI should not be used as a stand-alone test that latent profiles exist.
+Before interpreting the LPA-RI-selected profile count, inspect `fit$null_gate`
+or call `lpari_null_gate()` on a candidate table. If the gate recommends
+`retain_K1`, report the one-profile solution and treat any multiclass output as
+exploratory.
 
 The first release uses the Study 1 coefficients trained in the manuscript
 simulations. The strongest use case is small-sample enumeration under difficult

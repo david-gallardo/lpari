@@ -14,6 +14,8 @@ test_that("LPA-RI scores candidate rows", {
   posterior <- lpari_posterior(scored)
   expect_true(all(c("lpari_score", "posterior_k") %in% names(posterior)))
   expect_equal(sum(posterior$posterior_k), 1, tolerance = 1e-8)
+  gate <- lpari_null_gate(posterior)
+  expect_true(all(c("gate_pass", "recommended_action") %in% names(gate)))
 })
 
 test_that("main workflow returns an lpari_result", {
@@ -27,5 +29,7 @@ test_that("main workflow returns an lpari_result", {
   )
   expect_s3_class(fit, "lpari_result")
   expect_true(fit$selected_k %in% 1:3)
+  expect_true(fit$recommended_k %in% 1:3)
+  expect_true(all(c("gate_pass", "recommended_action") %in% names(fit$null_gate)))
   expect_equal(sum(fit$posterior$posterior_k), 1, tolerance = 1e-8)
 })
